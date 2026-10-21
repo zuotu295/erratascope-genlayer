@@ -1,0 +1,44 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "source_commit": "73d1fcaea52e0240bbd7da2a0602db0fb5c1584c",
+  "source_sha256": "46bd9a09a444a960b5b2ce52dcb8049ba7addd0393a94d5cc820e498a4240fab",
+  "contract_address": "0x5f3feA9070f5cD23A7Ce0Ee26D0fD81fb22812EA",
+  "owner": "0x7a9a693b03ce2fcd6c7b2f9c69158aafefeed2c3",
+  "dossier_id": "citation-notebook",
+  "deployment": {
+    "transaction": "0x580755c49b2c43f8e1ccf200748e4cb696a91619606d5d3056fe41514fef442b",
+    "status": "FINALIZED",
+    "execution": "SUCCESS",
+    "votes": {
+      "agree": 5
+    }
+  },
+  "seal": {
+    "transaction": "0xd22e05e8cfe5585616bc2c8340ca18786ecdf0a95860c599840407b4658ca95f",
+    "status": "FINALIZED",
+    "execution": "SUCCESS",
+    "votes": {
+      "agree": 5
+    },
+    "input_sha256": "088f00c37d524f77c16248d6e0c6a6141766c13426c52e50a532631446b206a4"
+  },
+  "assessment": {
+    "transaction": "0xf591b63c00fb4c4364cda3ae8ac91feaaae855ef7a868f5f14a06c6ed0c60197",
+    "status": "FINALIZED",
+    "result": "MAJORITY_DISAGREE",
+    "rotations": 3,
+    "votes": {
+      "idle": 2,
+      "disagree": 3
+    },
+    "persisted_review": false,
+    "revision_after": 0,
+    "observed_rejection_codes": [
+      "TypeError",
+      "source_changed"
+    ]
+  },
+  "diagnosis": "JSON response_format returns a parsed dictionary; json.loads in the independent audit raises TypeError. Mock host incorrectly returned strings and masked this error. Candidate fix accepts dictionaries and legacy text; mock host now returns parsed JSON. Separate source_changed rejections were also observed.",
+  "scope": "This evidence applies only to the pinned deployed source. The subsequent JSON audit fix has not been deployed or verified by live consensus."
+}
