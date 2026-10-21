@@ -1,0 +1,11 @@
+{
+  "protocol": "erratascope-1",
+  "chain_id": 61999,
+  "network": "Stable Studionet",
+  "rpc": "https://studio.genlayer.com/api",
+  "source": "contracts/errata_scope.py",
+  "source_sha256": "e80c4b0350ee533a45d9b6bfb3221b3a2b4dc0529cae10ba8d597f47326ea236",
+  "contract_address": null,
+  "deployment_transaction": null,
+  "verified_records": []
+}

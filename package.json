@@ -1,0 +1,19 @@
+{
+  "name": "erratascope-genlayer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "test": "node --test tests/*.test.js",
+    "prebuild": "node scripts/verify-source.mjs"
+  },
+  "dependencies": {
+    "genlayer-js": "1.1.8",
+    "viem": "2.38.5"
+  },
+  "devDependencies": {
+    "vite": "6.1.0"
+  }
+}
