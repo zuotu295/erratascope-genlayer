@@ -20,7 +20,7 @@ Connecting a wallet does not switch networks or import a private key. Switch to 
 5. Recheck its receipt. The application requires finalized status, successful execution, majority agreement for assessments, matching sender/destination/method/arguments and matching state readback.
 6. Inspect each claim’s per-notice action and cumulative action. Read the source evidence. Export the dossier when needed.
 
-The worked example uses Seibold et al.’s 2022 affiliation correction for their 2021 reproducibility study. Its two local interpretations illustrate study scope versus affiliation use. The publisher controls the source text; the example is not a live network assessment.
+The worked example uses Seibold et al.’s 2022 affiliation correction for their 2021 reproducibility study. Its two local interpretations illustrate study scope versus affiliation use. The **Worked example** tab contains local illustrations. **Read finalized example** retrieves the saved on-chain assessment and verifies its receipt.
 
 ## Read and recover
 
@@ -32,4 +32,4 @@ Account or chain changes invalidate the connection. Reload and reconnect before 
 
 ## Verification scope
 
-Local Python tests mock the GenLayer host, web retrieval and model calls. JavaScript tests exercise receipt gates, calldata encoding, request binding and canonical hashes. These tests do not emulate the fixed GenVM runner, actual validator models, wallet extensions or public-network finality. The finalized example was deployed, sealed and assessed through Studio full consensus. Use **Read finalized example** to verify its receipt and saved state without a wallet. External browser-wallet signing is not covered by that verification.
+Python tests cover contract rules with mocked retrieval and model responses. JavaScript tests cover receipt validation, calldata encoding, request binding and canonical hashes. The deployment evidence separately records the finalized Studio deployment, seal and assessment. **Read finalized example** verifies the deployed source, receipt and saved state without a wallet. This example does not exercise an external wallet extension.

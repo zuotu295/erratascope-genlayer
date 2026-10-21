@@ -33,5 +33,5 @@
     "persisted_review": false,
     "revision_after": 0
   },
-  "scope": "These observations apply to the pinned V1 source only. They do not verify the revised validator source."
+  "scope": "Historical deployment record for source_sha256 and contract_address above. The assessment persisted no review. Current deployment details are in deployment.json."
 }

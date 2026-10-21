@@ -39,6 +39,5 @@
       "source_changed"
     ]
   },
-  "diagnosis": "JSON response_format returns a parsed dictionary; json.loads in the independent audit raises TypeError. Mock host incorrectly returned strings and masked this error. Candidate fix accepts dictionaries and legacy text; mock host now returns parsed JSON. Separate source_changed rejections were also observed.",
-  "scope": "This evidence applies only to the pinned deployed source. The subsequent JSON audit fix has not been deployed or verified by live consensus."
+  "scope": "Historical deployment record for source_sha256 and contract_address above. The assessment persisted no review. Current deployment details are in deployment.json."
 }

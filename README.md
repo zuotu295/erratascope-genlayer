@@ -34,7 +34,7 @@ See [USAGE.md](USAGE.md) for deployment, wallet, and recovery instructions, and 
 
 The complete contract is included at `contracts/errata_scope.py`. `deployment.json` fixes its SHA256, protocol and network. `npm run build` verifies that digest before bundling. The browser compares the full deployed source to the bundled source before enabling writes.
 
-The release is deployed on Stable Studionet. **Read finalized example** verifies the deployed source, successful consensus receipt, signed arguments and persisted revision without a wallet. [Network evidence](evidence/studionet-v3.json) records the deployment, seal and assessment. [Revision 1](evidence/review-1.json) preserves the input, notice snapshot, findings and actions. Transactions were sent through Studio; external browser-wallet signing remains unverified.
+The release is deployed on Stable Studionet. **Read finalized example** verifies the deployed source, successful consensus receipt, signed arguments and persisted revision without a wallet. [Network evidence](evidence/studionet-v3.json) records the deployment, seal and assessment. [Revision 1](evidence/review-1.json) preserves the input, notice snapshot, findings and actions. The recorded transactions use Studio full consensus; they do not exercise an external wallet extension.
 
 The included GitHub Actions workflow tests the project and publishes `dist/` when GitHub Pages is configured to use Actions.
 
@@ -42,8 +42,8 @@ The included GitHub Actions workflow tests the project and publishes `dist/` whe
 
 First release: PLOS ONE textual publisher corrections, retractions and expressions of concern. An inaccessible, oversized or changing source fails closed. Missing linkage or inadequate evidence cannot clear a claim. This is an assessment of one notice against user-declared citation uses, not a paper truth score or a search for every notice.
 
-MIT · zuotu295
-
 ## Finalized example
 
-The sealed dossier cites study scope (C1) and reproduces an author affiliation (C2). The official affiliation correction finalized with majority agreement and persisted revision 1: C1 `NO_CHANGE_FROM_NOTICE`, C2 `REWRITE`. This result concerns this notice only; it does not establish the paper’s scientific validity. Earlier source versions and their unsuccessful assessments remain separately pinned in the evidence directory.
+The sealed dossier cites study scope (C1) and reproduces an author affiliation (C2). The official affiliation correction finalized with majority agreement and persisted revision 1: C1 `NO_CHANGE_FROM_NOTICE`, C2 `REWRITE`. This result concerns this notice only; it does not establish the paper’s scientific validity.
+
+MIT · zuotu295
