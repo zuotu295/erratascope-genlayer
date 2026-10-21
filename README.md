@@ -1,5 +1,7 @@
 # ErrataScope
 
+[Open the review desk](https://zuotu295.github.io/erratascope-genlayer/) · [Standalone Intelligent Contract](https://github.com/zuotu295/citation-impact-primitive)
+
 Read a publisher correction in the context of the exact claims you cite. One notice can change an author detail while leaving a citation to the study’s subject outside its scope.
 
 ErrataScope seals up to four citation uses, asks a GenLayer Intelligent Contract to assess a PLOS ONE publisher notice, and records a separate action for each use. Each notice adds a revision. A later unrelated notice cannot erase an earlier warning.
