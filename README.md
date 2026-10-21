@@ -43,3 +43,7 @@ The included GitHub Actions workflow tests the project and publishes `dist/` whe
 First release: PLOS ONE textual publisher corrections, retractions and expressions of concern. An inaccessible, oversized or changing source fails closed. Missing linkage or inadequate evidence cannot clear a claim. This is an assessment of one notice against user-declared citation uses, not a paper truth score or a search for every notice.
 
 MIT · zuotu295
+
+## Network verification
+
+The previous source deployed and sealed the example on Stable Studionet, but its assessment ended with `MAJORITY_DISAGREE` after three rotations and persisted no review. [Pinned network observations](evidence/studionet-v1.json) identify that source and all three transactions. The revised source-grounded validator included here has passed local protocol tests but has not yet been deployed or verified by live consensus.

@@ -47,6 +47,9 @@ INPUT={'doi':DOI,'title':'A computational reproducibility study','claims':[{'id'
 def result(effects=('UNCHANGED_SCOPE','CHANGED'),kind='CORRECTION'):
     return {'linked':True,'kind':kind,'findings':[{'id':'C'+str(i+1),'effect':effect,'quote':QUOTE,'reason':'The notice explicitly bounds this correction to affiliation.'} for i,effect in enumerate(effects)]}
 
+def audit(kind='CORRECTION', supported=True):
+    return {'paper_linked':True,'notice_kind':kind,'claims':[{'id':'C'+str(i+1),'effect_supported':supported,'quote_supported':True,'reason_supported':True} for i in range(2)]}
+
 class ProtocolTests(unittest.TestCase):
     def setUp(self):
         self.contract=c.ErrataScope()
@@ -56,7 +59,7 @@ class ProtocolTests(unittest.TestCase):
     def seal(self):
         return json.loads(self.contract.seal('research-1',json.dumps(INPUT)))
     def assess(self,effects=('UNCHANGED_SCOPE','CHANGED'),kind='CORRECTION'):
-        host.answers=[result(effects,kind),result(effects,kind),{'supported':True}]
+        host.answers=[result(effects,kind),audit(kind)]
         return json.loads(self.contract.assess('research-1',NOTICE,0))
     def test_owner_and_input_hash_bound(self):
         d=self.seal();self.assertEqual(d['input_sha256'],c.digest(c.canonical(INPUT)));self.assertEqual(d['owner'],gl.message.sender_address)
@@ -87,7 +90,7 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'already assessed'):self.contract.assess('research-1',NOTICE,1)
         self.assertEqual(len(self.contract.reviews),1)
     def test_disagreement_leaves_all_storage_unchanged(self):
-        self.seal();host.answers=[result(),result(('CHANGED','CHANGED'))]
+        self.seal();host.answers=[result(),audit(supported=False)]
         with self.assertRaisesRegex(ValueError,'Consensus rejected'):self.contract.assess('research-1',NOTICE,0)
         self.assertFalse(self.contract.reviews);self.assertFalse(self.contract.seen);self.assertEqual(self.contract.get_revision(gl.message.sender_address,'research-1'),0)
     def test_unrelated_notice_rejected(self):
@@ -99,7 +102,7 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Consensus rejected'):self.contract.assess('research-1',NOTICE,0)
         self.assertFalse(self.contract.reviews)
     def test_audit_rejects_unsupported_reason(self):
-        self.seal();host.answers=[result(),result(),{'supported':False}]
+        self.seal();host.answers=[result(),audit(supported=False)]
         with self.assertRaisesRegex(ValueError,'Consensus rejected'):self.contract.assess('research-1',NOTICE,0)
         self.assertFalse(self.contract.reviews)
     def test_fabricated_quote_rejected(self):
@@ -120,7 +123,7 @@ class ProtocolTests(unittest.TestCase):
         for data in [{**INPUT,'claims':[]},{**INPUT,'doi':'https://evil.example/'},{**INPUT,'claims':[{**INPUT['claims'][0],'id':'C2'}]}]:
             with self.assertRaises(ValueError):c.parse_input(json.dumps(data))
     def test_second_notice_appends_without_overwrite(self):
-        self.seal();first=self.assess();other='10.1371/journal.pone.0306187';host.source=SOURCE.replace(NOTICE,other);host.fetches=0;host.answers=[result(('UNCERTAIN','UNCERTAIN')),result(('UNCERTAIN','UNCERTAIN')),{'supported':True}]
+        self.seal();first=self.assess();other='10.1371/journal.pone.0306187';host.source=SOURCE.replace(NOTICE,other);host.fetches=0;host.answers=[result(('UNCERTAIN','UNCERTAIN')),audit()]
         self.contract.assess('research-1',other,1)
         self.assertEqual(self.contract.get_revision(gl.message.sender_address,'research-1'),2)
         self.assertEqual(json.loads(self.contract.get_review(gl.message.sender_address,'research-1',1)),first)
@@ -134,6 +137,33 @@ class ProtocolTests(unittest.TestCase):
     def test_cumulative_identity_cannot_be_reordered(self):
         with self.assertRaisesRegex(ValueError,'identity changed'):
             c.merge_actions([{'id':'C2','action':'REWRITE'}],[{'id':'C1','action':'REWRITE'}])
+    def test_grounded_audit_requires_every_claim(self):
+        value=audit();value['claims'].pop()
+        self.assertFalse(c.audit_supported(value,INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_rejects_wrong_paper(self):
+        value=audit();value['paper_linked']=False
+        self.assertFalse(c.audit_supported(value,INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_rejects_wrong_notice_kind(self):
+        self.assertFalse(c.audit_supported(audit('RETRACTION'),INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_rejects_reordered_rows(self):
+        value=audit();value['claims'].reverse()
+        self.assertFalse(c.audit_supported(value,INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_rejects_string_boolean(self):
+        value=audit();value['claims'][0]['effect_supported']='true'
+        self.assertFalse(c.audit_supported(value,INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_rejects_numeric_boolean(self):
+        value=audit();value['claims'][0]['effect_supported']=1
+        self.assertFalse(c.audit_supported(value,INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_rejects_missing_quote_support(self):
+        value=audit();value['claims'][1]['quote_supported']=False
+        self.assertFalse(c.audit_supported(value,INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_rejects_unsupported_reason(self):
+        value=audit();value['claims'][1]['reason_supported']=False
+        self.assertFalse(c.audit_supported(value,INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_rejects_overall_only_approval(self):
+        self.assertFalse(c.audit_supported({'supported':True},INPUT['claims'],'CORRECTION'))
+    def test_grounded_audit_does_not_need_a_second_candidate(self):
+        self.seal();self.assess();self.assertEqual(host.answers,[])
     def test_unicode_hash_is_canonical(self):
         self.assertNotEqual(c.digest('研究'),c.digest('research'));self.assertIn('研究',c.canonical({'x':'研究'}))
 

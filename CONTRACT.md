@@ -13,7 +13,9 @@
 
 ## Independent consensus
 
-The leader fetches the canonical PLOS ONE page and proposes a bounded claim matrix. Each validator independently fetches and normalizes the page, requires the same source digest, derives its own notice classification and all claim effects, and compares every effect. A separate grounded audit checks the proposed evidence and reasoning against the source. JSON shape alone is insufficient. Web content and citation text are untrusted data inside the prompt.
+The leader fetches the canonical PLOS ONE page and proposes a bounded claim matrix. Each validator independently fetches and normalizes the page, requires the same source digest, and derives the original-paper link and notice kind from that source. It checks every proposed effect, quotation and reason against the source and declared citation use. All three support checks must be literal true for every claim. Candidate assertions are untrusted. JSON shape or a single overall approval is insufficient.
+
+This uses source-grounded independent validation. Validators do not generate a second competing assessment before performing the audit. Rejection diagnostics distinguish candidate shape, source changes, grounded audit rejection and parsing/runtime exception classes.
 
 The contract verifies exact quotation membership, claim identity, complete matrix coverage and notice-type constraints. A full retraction must withdraw every claim. An expression of concern cannot clear a claim. Only an accepted assessment reaches deterministic storage.
 

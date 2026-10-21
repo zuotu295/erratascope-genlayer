@@ -1,4 +1,5 @@
 import "./style.css";
+import deployment from "../deployment.json";
 import { exampleInput, exampleNotice, exampleReview } from "./example.js";
 import {
   json,
@@ -43,7 +44,7 @@ let mode = "example",
   busy = false;
 let draft = structuredClone(exampleInput);
 let pending = saved("pending");
-let contract = saved("contract") || "";
+let contract = saved("contract") || deployment.contract_address || "";
 let owner = saved("owner") || "";
 let dossierId = saved("id") || "citation-notebook";
 let notice = exampleNotice;
@@ -87,7 +88,7 @@ function snapshot() {
 }
 function draw() {
   $("#app").innerHTML =
-    `<div class="shell"><header><div class="brand"><img src="./mark.svg" alt="ErrataScope mark">ErrataScope<small>THE CITATION REVIEW DESK</small></div><nav><a href="#workspace">Review desk</a><a href="#method">The method</a><button id="network"><span class="dot"></span>Studionet settings</button></nav></header><main><section class="hero"><div><div class="eyebrow">Research changes. Context matters.</div><h1>A correction.<br>Not every claim<br><em>changes with it.</em></h1><p class="intro">Follow a publisher’s correction to the exact claims you cite. Keep the context, inspect the evidence, and leave a shared record on GenLayer.</p><div class="hero-actions"><button class="red" id="start">Open the review desk ↗</button><button id="walkthrough">Explore a worked example</button></div><div class="hero-note">PLOS ONE notices · Up to 4 citation uses · No paid API key</div></div><div class="diagram" aria-label="A correction linked to two citation uses"><div class="paper"><div class="mini">RESEARCH NOTE / 001</div><h3>The paper changed.<br>What about your citation?</h3><div class="paper-line"></div><div class="paper-line short"></div><p style="font:italic 16px Georgia;color:#9c4738;border-bottom:1px solid #bb7865;padding:8px 0">Correction: author affiliation</p><div class="paper-line"></div><div class="paper-line short"></div><div style="font-size:10px;letter-spacing:1px;margin-top:28px">C1 · STUDY SCOPE &nbsp;&nbsp; → &nbsp; RETAIN<br><br>C2 · AFFILIATION &nbsp;&nbsp;&nbsp; → &nbsp; REVISE</div></div><div class="stamp">Same notice. <span>Different impact.</span></div></div></section><div class="stats"><div><b>One paper</b>A fixed record of how you cite it</div><div><b>Every claim</b>Its own evidence and next step</div><div><b>A shared record</b>Independently reviewed on GenLayer</div></div><section id="workspace"><div class="section-head"><div class="eyebrow">01 / The review desk<h2>Keep the claim in view.</h2></div><span class="pill" id="mode-label">WORKED EXAMPLE</span></div><div class="tabs"><button id="example-tab" class="${mode === "example" ? "active" : ""}">Worked example</button><button id="live-tab" class="${mode === "live" ? "active" : ""}">Your citation dossier</button><button id="read-tab">Read a chain record</button></div><div id="message"></div><div class="workspace"><div class="card"><div class="cardhead"><h3>The citation dossier</h3><span class="step">01 / SEAL THE CONTEXT</span></div><p class="small">Write what you intend to cite, including the figure, table, method or author detail you depend on. Sealing preserves this exact version.</p><label class="field"><span>Dossier ID</span><input id="dossier-id" maxlength="48" pattern="[a-zA-Z0-9_-]{3,48}" value="${esc(dossierId)}"></label><label class="field"><span>Original paper DOI · PLOS ONE</span><input id="doi" value="${esc(draft.doi)}" maxlength="31"></label><label class="field"><span>Paper title</span><textarea id="title" maxlength="200">${esc(draft.title)}</textarea></label><div id="claims"></div><button id="add">+ Add a citation use</button><div class="buttons"><button class="primary" id="seal">Seal dossier on GenLayer</button></div><p class="small" id="seal-hint">${mode === "example" ? "The worked example is authored locally. Switch to your dossier to sign a transaction." : "Connect your wallet and verify the contract in Studionet settings."}</p></div><div class="side"><div class="card"><div class="cardhead"><h3>The publisher notice</h3><span class="step">02 / TRACE THE IMPACT</span></div><label class="field"><span>Correction or retraction DOI · PLOS ONE</span><input id="notice-doi" value="${esc(notice)}" maxlength="31"></label><p class="small">GenLayer reads the publisher’s page and verifies its relationship to your original paper. Each validator independently checks the claim matrix.</p><div class="buttons"><button class="red" id="assess">Assess this notice</button><button id="reload">Reload chain state</button></div></div><div id="pending"></div><div id="results"></div></div></div></section><section class="method" id="method"><div class="eyebrow">02 / The method</div><h2>Less guesswork. More context.</h2><div class="method-grid"><div><b>01 &nbsp; Fix the citation use</b><p>A correction can affect an author detail without changing a study’s subject. Separate your uses before evaluating the notice. Sealed claims cannot be silently edited.</p></div><div><b>02 &nbsp; Check the primary source</b><p>Leader and validators read the publisher notice. They independently assess the same claims, agree on the effects, and audit the supporting quotations.</p></div><div><b>03 &nbsp; Preserve the trail</b><p>Each notice adds a revision. Earlier concerns remain visible even when a later notice affects a different detail. Export source snapshots and hashes to review the decision later.</p></div></div><details><summary>What does an assessment establish?</summary><p>It describes how one notice affects your declared citation use. Cumulative actions preserve the most cautious action across reviewed notices and do not automatically resolve earlier issues. “No change from this notice” is limited to that notice: it is not a truth score, an all-clear for the paper, or proof that no other notices exist. Claims and locators are supplied by the user. ErrataScope does not reproduce experiments or verify that a claim was originally supported. First release supports PLOS ONE only; paywalled, image-only or ambiguous notices can fail or require human review.</p></details></section></main><footer><span>ErrataScope &nbsp; / &nbsp; Read the correction. Keep the context.</span><span>Built on GenLayer · Stable Studionet 61999 · v0.1</span></footer></div><dialog id="settings"><div class="cardhead"><h3>Studionet connection</h3><button id="close">Close</button></div><div id="settings-message"></div><p class="small">Verify this release’s full deployed source before signing. Reads require no wallet.</p><label class="field"><span>Contract address</span><input id="address" placeholder="0x…" value="${esc(contract)}"></label><div class="buttons"><button id="verify">Verify contract source</button><button id="connect">Connect wallet</button></div><p class="connection" id="connection">${verified ? "Source verified · " : ""}${wallet ? esc(wallet.owner) : "Wallet not connected"}</p><div class="hash" id="source-hash"></div><label class="field"><span>Record owner address · public read</span><input id="owner" value="${esc(owner)}" placeholder="0x…"></label><label class="field"><span>Dossier ID for public read</span><input id="record-id" value="${esc(dossierId)}" maxlength="48"></label><div class="buttons"><button id="read-record">Read dossier</button></div><details><summary>Deploy this contract from your wallet</summary><p>For an unpublished installation, deploy the bundled source once. This requests a wallet signature on Stable Studionet. Wait for finality before setting the contract address. Deployment is not a claim assessment.</p><button id="deploy">Deploy bundled contract</button></details><details><summary>Transaction evidence</summary><pre id="raw-receipt">${receipt ? esc(json(receipt)) : "No receipt loaded."}</pre></details></dialog>`;
+    `<div class="shell"><header><div class="brand"><img src="./mark.svg" alt="ErrataScope mark">ErrataScope<small>THE CITATION REVIEW DESK</small></div><nav><a href="#workspace">Review desk</a><a href="#method">The method</a><button id="network"><span class="dot"></span>Studionet settings</button></nav></header><main><section class="hero"><div><div class="eyebrow">Research changes. Context matters.</div><h1>A correction.<br>Not every claim<br><em>changes with it.</em></h1><p class="intro">Follow a publisher’s correction to the exact claims you cite. Keep the context, inspect the evidence, and leave a shared record on GenLayer.</p><div class="hero-actions"><button class="red" id="start">Open the review desk ↗</button><button id="recorded" ${deployment.verified_records.length ? "" : "disabled"}>Read finalized example</button><button id="walkthrough">Explore a worked example</button></div><div class="hero-note">PLOS ONE notices · Up to 4 citation uses · No paid API key</div></div><div class="diagram" aria-label="A correction linked to two citation uses"><div class="paper"><div class="mini">RESEARCH NOTE / 001</div><h3>The paper changed.<br>What about your citation?</h3><div class="paper-line"></div><div class="paper-line short"></div><p style="font:italic 16px Georgia;color:#9c4738;border-bottom:1px solid #bb7865;padding:8px 0">Correction: author affiliation</p><div class="paper-line"></div><div class="paper-line short"></div><div style="font-size:10px;letter-spacing:1px;margin-top:28px">C1 · STUDY SCOPE &nbsp;&nbsp; → &nbsp; RETAIN<br><br>C2 · AFFILIATION &nbsp;&nbsp;&nbsp; → &nbsp; REVISE</div></div><div class="stamp">Same notice. <span>Different impact.</span></div></div></section><div class="stats"><div><b>One paper</b>A fixed record of how you cite it</div><div><b>Every claim</b>Its own evidence and next step</div><div><b>A shared record</b>Independently reviewed on GenLayer</div></div><section id="workspace"><div class="section-head"><div class="eyebrow">01 / The review desk<h2>Keep the claim in view.</h2></div><span class="pill" id="mode-label">WORKED EXAMPLE</span></div><div class="tabs"><button id="example-tab" class="${mode === "example" ? "active" : ""}">Worked example</button><button id="live-tab" class="${mode === "live" ? "active" : ""}">Your citation dossier</button><button id="read-tab">Read a chain record</button></div><div id="message"></div><div class="workspace"><div class="card"><div class="cardhead"><h3>The citation dossier</h3><span class="step">01 / SEAL THE CONTEXT</span></div><p class="small">Write what you intend to cite, including the figure, table, method or author detail you depend on. Sealing preserves this exact version.</p><label class="field"><span>Dossier ID</span><input id="dossier-id" maxlength="48" pattern="[a-zA-Z0-9_-]{3,48}" value="${esc(dossierId)}"></label><label class="field"><span>Original paper DOI · PLOS ONE</span><input id="doi" value="${esc(draft.doi)}" maxlength="31"></label><label class="field"><span>Paper title</span><textarea id="title" maxlength="200">${esc(draft.title)}</textarea></label><div id="claims"></div><button id="add">+ Add a citation use</button><div class="buttons"><button class="primary" id="seal">Seal dossier on GenLayer</button></div><p class="small" id="seal-hint">${mode === "example" ? "The worked example is authored locally. Switch to your dossier to sign a transaction." : "Connect your wallet and verify the contract in Studionet settings."}</p></div><div class="side"><div class="card"><div class="cardhead"><h3>The publisher notice</h3><span class="step">02 / TRACE THE IMPACT</span></div><label class="field"><span>Correction or retraction DOI · PLOS ONE</span><input id="notice-doi" value="${esc(notice)}" maxlength="31"></label><p class="small">GenLayer reads the publisher’s page and verifies its relationship to your original paper. Each validator independently checks the claim matrix.</p><div class="buttons"><button class="red" id="assess">Assess this notice</button><button id="reload">Reload chain state</button></div></div><div id="pending"></div><div id="results"></div></div></div></section><section class="method" id="method"><div class="eyebrow">02 / The method</div><h2>Less guesswork. More context.</h2><div class="method-grid"><div><b>01 &nbsp; Fix the citation use</b><p>A correction can affect an author detail without changing a study’s subject. Separate your uses before evaluating the notice. Sealed claims cannot be silently edited.</p></div><div><b>02 &nbsp; Check the primary source</b><p>Leader and validators read the publisher notice. They independently assess the same claims, agree on the effects, and audit the supporting quotations.</p></div><div><b>03 &nbsp; Preserve the trail</b><p>Each notice adds a revision. Earlier concerns remain visible even when a later notice affects a different detail. Export source snapshots and hashes to review the decision later.</p></div></div><details><summary>What does an assessment establish?</summary><p>It describes how one notice affects your declared citation use. Cumulative actions preserve the most cautious action across reviewed notices and do not automatically resolve earlier issues. “No change from this notice” is limited to that notice: it is not a truth score, an all-clear for the paper, or proof that no other notices exist. Claims and locators are supplied by the user. ErrataScope does not reproduce experiments or verify that a claim was originally supported. First release supports PLOS ONE only; paywalled, image-only or ambiguous notices can fail or require human review.</p></details></section></main><footer><span>ErrataScope &nbsp; / &nbsp; Read the correction. Keep the context.</span><span>Built on GenLayer · Stable Studionet 61999 · v0.1</span></footer></div><dialog id="settings"><div class="cardhead"><h3>Studionet connection</h3><button id="close">Close</button></div><div id="settings-message"></div><p class="small">Verify this release’s full deployed source before signing. Reads require no wallet.</p><label class="field"><span>Contract address</span><input id="address" placeholder="0x…" value="${esc(contract)}"></label><div class="buttons"><button id="verify">Verify contract source</button><button id="connect">Connect wallet</button></div><p class="connection" id="connection">${verified ? "Source verified · " : ""}${wallet ? esc(wallet.owner) : "Wallet not connected"}</p><div class="hash" id="source-hash"></div><label class="field"><span>Record owner address · public read</span><input id="owner" value="${esc(owner)}" placeholder="0x…"></label><label class="field"><span>Dossier ID for public read</span><input id="record-id" value="${esc(dossierId)}" maxlength="48"></label><div class="buttons"><button id="read-record">Read dossier</button></div><details><summary>Deploy this contract from your wallet</summary><p>For an unpublished installation, deploy the bundled source once. This requests a wallet signature on Stable Studionet. Wait for finality before setting the contract address. Deployment is not a claim assessment.</p><button id="deploy">Deploy bundled contract</button></details><details><summary>Transaction evidence</summary><pre id="raw-receipt">${receipt ? esc(json(receipt)) : "No receipt loaded."}</pre></details></dialog>`;
   renderClaims();
   bind();
   renderResults();
@@ -111,6 +112,63 @@ function renderClaims() {
   );
 }
 function bind() {
+  $("#recorded").onclick = () =>
+    task(async () => {
+      const record = deployment.verified_records[0];
+      if (!record)
+        throw Error("No finalized example is recorded in this release yet.");
+      const address = deployment.contract_address;
+      await chain.verify(address);
+      const tx = await chain.transaction(record.transaction);
+      if (!finalSuccess(tx, true))
+        throw Error(
+          "The example receipt does not establish finalized successful consensus.",
+        );
+      const state = await chain.read(
+        address,
+        record.owner,
+        record.id,
+        record.revision,
+      );
+      bindReadback(
+        {
+          type: "assess",
+          owner: record.owner,
+          id: record.id,
+          input_sha256: record.input_sha256,
+          notice: record.notice_doi,
+          revision: record.revision - 1,
+        },
+        state.dossier,
+        state.review,
+      );
+      bindReceipt(
+        {
+          type: "assess",
+          owner: record.owner,
+          address,
+          args: [record.id, record.notice_doi, record.revision - 1],
+        },
+        tx,
+        chain.receiptCall(tx),
+      );
+      if ((await sha(state.review.source)) !== state.review.source_sha256)
+        throw Error("Source snapshot digest mismatch.");
+      loaded = state;
+      receipt = tx;
+      contract = address;
+      owner = record.owner;
+      dossierId = record.id;
+      draft = structuredClone(state.dossier.input);
+      mode = "live";
+      verified = address.toLowerCase();
+      draw();
+      msg(
+        "Finalized example verified against its receipt, deployed source and saved dossier.",
+        "good",
+      );
+      $("#workspace").scrollIntoView({ behavior: "smooth" });
+    });
   $("#network").onclick = () => $("#settings").showModal();
   $("#close").onclick = () => $("#settings").close();
   $("#start").onclick = () =>
