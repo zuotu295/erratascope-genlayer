@@ -220,7 +220,9 @@ class ErrataScope(gl.Contract):
                     + canonical(data) + '\nPUBLISHER SOURCE DATA:\n' + source
                     + '\nPROPOSED ASSESSMENT DATA:\n' + canonical(proposed)
                 )
-                audit = json.loads(gl.nondet.exec_prompt(prompt, response_format='json'))
+                audit = gl.nondet.exec_prompt(prompt, response_format='json')
+                if isinstance(audit, str):
+                    audit = json.loads(audit)
                 accepted = audit_supported(audit, claims, proposed['kind'])
                 if not accepted:
                     print('validation_rejected: grounded_claim_audit')

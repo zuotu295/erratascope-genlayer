@@ -26,7 +26,7 @@ class Host:
         self.fetches += 1
         return self.second_source if self.fetches > 1 and self.second_source else self.source
     def prompt(self, prompt, response_format):
-        return json.dumps(self.answers.pop(0))
+        return self.answers.pop(0)
     def run(self, leader, validator):
         value = leader()
         if self.force_reject or not validator(Return(value)):
@@ -73,6 +73,10 @@ class ProtocolTests(unittest.TestCase):
         self.seal();gl.message.sender_address='0x'+'2'*40;self.seal();self.assertEqual(len(self.contract.dossiers),2)
     def test_corrected_affiliation_leaves_other_claim_scoped(self):
         self.seal();r=self.assess();self.assertEqual([x['action'] for x in r['actions']],['NO_CHANGE_FROM_NOTICE','REWRITE']);self.assertEqual(host.fetches,2)
+    def test_legacy_json_text_audit_is_supported(self):
+        self.seal();host.answers=[json.dumps(result()),json.dumps(audit())]
+        r=json.loads(self.contract.assess('research-1',NOTICE,0))
+        self.assertEqual(r['revision'],1)
     def test_retraction_stops_all_citation_uses(self):
         self.seal();r=self.assess(('WITHDRAWN','WITHDRAWN'),'RETRACTION');self.assertTrue(all(x['action']=='STOP_CITING' for x in r['actions']))
     def test_concern_requires_review(self):

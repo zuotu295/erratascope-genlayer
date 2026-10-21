@@ -4,7 +4,7 @@
   "network": "Stable Studionet",
   "rpc": "https://studio.genlayer.com/api",
   "source": "contracts/errata_scope.py",
-  "source_sha256": "46bd9a09a444a960b5b2ce52dcb8049ba7addd0393a94d5cc820e498a4240fab",
+  "source_sha256": "f7f964656288364b82f86a3c1cff3d903336401841a260f9db73c9b4b4c1993c",
   "contract_address": null,
   "deployment_transaction": null,
   "verified_records": []
