@@ -42,8 +42,12 @@ export function executionOK(tx) {
   const leaders = tx.consensus_data?.leader_receipt;
   const rows = Array.isArray(leaders) ? leaders : leaders ? [leaders] : [];
   return (
-    rows.length > 0 &&
-    rows.every(
+    rows.some((x) => String(x.mode || "leader").toLowerCase() === "leader") &&
+    rows.filter((x) => !(
+      String(x.mode).toLowerCase() === "validator" &&
+      String(x.vote).toLowerCase() === "idle" &&
+      x.genvm_result?.stderr?.trim() === "Validator execution cancelled after quorum"
+    )).every(
       (x) =>
         String(x.execution_result).toUpperCase() === "SUCCESS" &&
         !x.error &&

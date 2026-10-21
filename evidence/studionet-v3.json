@@ -1,0 +1,53 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "source_commit": "7dcf9435881154d79e4964de47e82f739216f8fd",
+  "source_sha256": "f7f964656288364b82f86a3c1cff3d903336401841a260f9db73c9b4b4c1993c",
+  "contract_address": "0x718f4Bf7De087e83a728276B33308A4683261ef7",
+  "owner": "0x7a9a693b03ce2fcd6c7b2f9c69158aafefeed2c3",
+  "dossier_id": "citation-notebook",
+  "deployment": {
+    "transaction": "0x35eb7f996c350c6ebf06a2cc30831534d2c944af20f3dfd9d416123528130446",
+    "status": "FINALIZED",
+    "result": "MAJORITY_AGREE",
+    "votes": {
+      "agree": 3,
+      "idle": 2
+    }
+  },
+  "seal": {
+    "transaction": "0x409b67b83f9e76fbafaba73ca471a577379f781c8b85f5bbb7c90ab4b03a6eef",
+    "status": "FINALIZED",
+    "result": "MAJORITY_AGREE",
+    "votes": {
+      "idle": 2,
+      "agree": 3
+    }
+  },
+  "assess": {
+    "transaction": "0x029db09a4e8c89aeea0576bb296fb86062c932e43c00c66f8f378c6e420e4026",
+    "status": "FINALIZED",
+    "result": "MAJORITY_AGREE",
+    "votes": {
+      "disagree": 1,
+      "agree": 3,
+      "idle": 1
+    }
+  },
+  "readback": {
+    "revision": 1,
+    "input_sha256": "088f00c37d524f77c16248d6e0c6a6141766c13426c52e50a532631446b206a4",
+    "source_sha256": "b4e273c88eb9235f2924f53f48a9ec41068fdbda771343caa3c7ab30b7976594",
+    "actions": [
+      {
+        "action": "NO_CHANGE_FROM_NOTICE",
+        "id": "C1"
+      },
+      {
+        "action": "REWRITE",
+        "id": "C2"
+      }
+    ]
+  },
+  "scope": "Full-consensus Studio transactions and finalized public state reads verified. External browser-wallet signing is not covered by this example."
+}
