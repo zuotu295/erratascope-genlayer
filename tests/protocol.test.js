@@ -149,3 +149,17 @@ test("draft with empty citation use rejected", () =>
       claims: [{ id: "C1", text: "", locator: "x" }],
     }),
   ));
+
+test("quorum-cancelled idle validator does not invalidate successful leader", () => {
+  const tx = structuredClone(receipt);
+  tx.consensus_data.leader_receipt[0].mode = "leader";
+  tx.consensus_data.leader_receipt.push({mode:"validator", vote:"idle", execution_result:"ERROR", genvm_result:{stderr:"Validator execution cancelled after quorum"}});
+  assert.equal(finalSuccess(tx),true);
+  tx.consensus_data.leader_receipt[0].execution_result="ERROR";
+  assert.equal(finalSuccess(tx),false);
+});
+test("unexplained validator execution error remains rejected", () => {
+  const tx = structuredClone(receipt);
+  tx.consensus_data.leader_receipt.push({mode:"validator",vote:"idle",execution_result:"ERROR",genvm_result:{stderr:"unexpected execution error"}});
+  assert.equal(finalSuccess(tx),false);
+});

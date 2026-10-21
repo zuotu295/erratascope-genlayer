@@ -32,4 +32,4 @@ Account or chain changes invalidate the connection. Reload and reconnect before 
 
 ## Verification scope
 
-Local Python tests mock the GenLayer host, web retrieval and model calls. JavaScript tests exercise receipt gates, calldata encoding, request binding and canonical hashes. These tests do not emulate the fixed GenVM runner, actual validator models, wallet extensions or public-network finality. Browser checks cover the local worked example and unsigned forms; a real wallet round trip is still required before treating this as a deployed release.
+Local Python tests mock the GenLayer host, web retrieval and model calls. JavaScript tests exercise receipt gates, calldata encoding, request binding and canonical hashes. These tests do not emulate the fixed GenVM runner, actual validator models, wallet extensions or public-network finality. The finalized example was deployed, sealed and assessed through Studio full consensus. Use **Read finalized example** to verify its receipt and saved state without a wallet. External browser-wallet signing is not covered by that verification.

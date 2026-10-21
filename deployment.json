@@ -4,8 +4,17 @@
   "network": "Stable Studionet",
   "rpc": "https://studio.genlayer.com/api",
   "source": "contracts/errata_scope.py",
-  "source_sha256": "e80c4b0350ee533a45d9b6bfb3221b3a2b4dc0529cae10ba8d597f47326ea236",
-  "contract_address": null,
-  "deployment_transaction": null,
-  "verified_records": []
+  "source_sha256": "f7f964656288364b82f86a3c1cff3d903336401841a260f9db73c9b4b4c1993c",
+  "contract_address": "0x718f4Bf7De087e83a728276B33308A4683261ef7",
+  "deployment_transaction": "0x35eb7f996c350c6ebf06a2cc30831534d2c944af20f3dfd9d416123528130446",
+  "verified_records": [
+    {
+      "owner": "0x7a9a693b03ce2fcd6c7b2f9c69158aafefeed2c3",
+      "id": "citation-notebook",
+      "revision": 1,
+      "input_sha256": "088f00c37d524f77c16248d6e0c6a6141766c13426c52e50a532631446b206a4",
+      "notice_doi": "10.1371/journal.pone.0269047",
+      "transaction": "0x029db09a4e8c89aeea0576bb296fb86062c932e43c00c66f8f378c6e420e4026"
+    }
+  ]
 }

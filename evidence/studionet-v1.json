@@ -1,0 +1,37 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "source_commit": "79d1427caac9699eeb96d733f54da003189ced92",
+  "source_sha256": "e80c4b0350ee533a45d9b6bfb3221b3a2b4dc0529cae10ba8d597f47326ea236",
+  "contract_address": "0xE6Ff1C31B89639A0AD154c6f75A1b9aB4945B88f",
+  "owner": "0x7a9a693b03ce2fcd6c7b2f9c69158aafefeed2c3",
+  "dossier_id": "citation-notebook",
+  "deployment": {
+    "transaction": "0x2e11a2c39eee73e315a5dd447b6bf0c7aa675c22818a99bfd39691046242fd42",
+    "status": "FINALIZED",
+    "execution": "SUCCESS",
+    "votes": {
+      "agree": 5
+    }
+  },
+  "seal": {
+    "transaction": "0xf8506fcd4580876af6132eca9a840d0aa8cb474dd16bf9c8ce66da795a7416fb",
+    "status": "FINALIZED",
+    "execution": "SUCCESS",
+    "votes": {
+      "agree": 4,
+      "idle": 1
+    },
+    "input_sha256": "088f00c37d524f77c16248d6e0c6a6141766c13426c52e50a532631446b206a4"
+  },
+  "assessment": {
+    "transaction": "0x57d63e5784bcdeba3b722fda8aef6c0811d155a6c791ff811b417e69713c19f9",
+    "status": "FINALIZED",
+    "result": "MAJORITY_DISAGREE",
+    "studio_label": "UNDETERMINED",
+    "rotations": 3,
+    "persisted_review": false,
+    "revision_after": 0
+  },
+  "scope": "These observations apply to the pinned V1 source only. They do not verify the revised validator source."
+}
