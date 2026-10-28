@@ -584,7 +584,7 @@ function renderComparison(){
   if(!Number.isInteger(from)||!Number.isInteger(to)||from<0||to>current||from>=to)throw Error('Choose an earlier revision from 0 and a later revision up to '+current+'.');
   const version=viewVersion;
   const address=contract,recordOwner=loaded.dossier.owner,id=loaded.dossier.id,expected=loaded.dossier.input_sha256;
-  comparison=null;$('#comparison-status').textContent='Reading finalized revisions and verifying source snapshots…';
+  comparison=null;host.querySelector('.comparison-output')?.remove();$('#comparison-status').textContent='Reading finalized revisions and verifying source snapshots…';
   try{
    await chain.verify(address);
    const [left,right]=await Promise.all([chain.read(address,recordOwner,id,from),chain.read(address,recordOwner,id,to)]);
