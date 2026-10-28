@@ -31,11 +31,3 @@ For a dossier with multiple notices, enter any valid earlier/later pair. Non-adj
 31 JavaScript tests (including seven new comparison tests), 36 existing mocked-host contract tests, production build with contract-source verification, and DOM interaction checks passed. Tests cover retained warnings, evidence-only changes, arbitrary revision endpoints, invalid ranges, substituted dossier/source/claim identities, baseline semantics and CSV escaping. GitHub test/build and Pages deployment succeeded for feature commit `ec9fc26c046526c672ad6f0bfc8164adbf0505d2`. Live browser checks read the original finalized example, verified the baseline-to-R1 comparison, downloaded and inspected both JSON/CSV reports, and rejected an equal-revision range. The exported live report is [evidence/milestone-1/comparison-0-1.json](evidence/milestone-1/comparison-0-1.json). The two claims correctly move from unassessed baseline to NO_CHANGE_FROM_NOTICE and REWRITE, respectively. This verification reads existing chain state; it creates no transaction. Desktop layout was visually checked; mobile layout is implemented but not visually verified in a mobile browser.
 
 The deployed contract and its protocol are unchanged. This release adds application functionality over retained GenLayer records. It does not claim new on-chain assessments, a new contract deployment, new users or traction. Existing network receipts describe the original deployment and assessment only.
-
-## Submission title
-
-ErrataScope v0.2 — Verified Revision Comparison and Change Reports
-
-## Submission description
-
-Added a revision comparison workspace to ErrataScope. Previously, readers could inspect only one notice assessment at a time. They can now compare sealed input or any earlier revision with a later retained revision, inspect claim-by-claim action and evidence changes, and see when earlier cumulative warnings remain in force. Baseline 0 is explicitly unassessed, not an all-clear. Comparisons validate dossier identity, input/source digests and claim ordering before display. Self-contained JSON reports preserve both endpoint records; CSV exports provide a portable change table. All 67 automated tests and the production build passed. The deployed contract is unchanged; the feature reads existing finalized GenLayer records without a wallet or a new transaction.
