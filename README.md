@@ -30,6 +30,14 @@ The static production output is `dist/`. No backend, paid API subscription, or a
 
 See [USAGE.md](USAGE.md) for deployment, wallet, and recovery instructions, and [CONTRACT.md](CONTRACT.md) for the protocol and trust boundary.
 
+## Revision comparison workspace (v0.2)
+
+Load a public finalized dossier, then use **What changed between reviews?** below the review desk. Enter an earlier revision (0 means sealed input with no assessment) and a later revision, then choose **Compare finalized revisions**. Any retained revision can be addressed, including revisions outside the ten most recent history buttons.
+
+Each claim shows earlier and later notice-specific actions, cumulative actions, source quotations, explanations and change indicators. Earlier warnings remain visible when a later notice leaves a claim outside its scope. Non-adjacent revisions compare endpoints rather than reconstructing intermediate history.
+
+Comparisons verify deployed source, dossier identity, canonical input digest, source snapshot digests and claim ordering. Export a self-contained JSON comparison or CSV. This is a comparison of existing finalized state, with no wallet signature, paid API key or new on-chain assessment. See [milestone changes and reproduction](MILESTONE.md).
+
 ## Source and deployment
 
 The complete contract is included at `contracts/errata_scope.py`. `deployment.json` fixes its SHA256, protocol and network. `npm run build` verifies that digest before bundling. The browser compares the full deployed source to the bundled source before enabling writes.

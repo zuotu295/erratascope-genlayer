@@ -619,3 +619,5 @@ dialog .field {
   text-transform: none;
   letter-spacing: -0.7px;
 }
+
+.revision-desk{margin-top:26px}.revision-fields,.revision-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.revision-fields{max-width:680px}.revision-claim{padding:20px 0;border-top:1px solid #d8dbd0}.revision-claim h4{margin:8px 0;font-size:16px}.revision-claim>p{font-size:13px;line-height:1.8}.revision-columns>div{min-width:0;padding:18px;background:#f5f5ed;border:1px solid #d8dbd0;border-radius:6px}.revision-columns p{font-size:13px;line-height:1.8}.revision-columns blockquote{overflow-wrap:anywhere}.comparison-output{margin-top:24px}.revision-desk .buttons{flex-wrap:wrap}.revision-desk input{width:100%}#comparison-status{margin-top:14px;font-size:13px;color:#9c4738}@media(max-width:650px){.revision-fields,.revision-columns{grid-template-columns:1fr;gap:12px}.revision-desk{padding:18px}.revision-desk .cardhead{align-items:flex-start;gap:12px;flex-direction:column}}
