@@ -380,6 +380,7 @@ async function send(type, args) {
   }
 }
 function buttons() {
+  if ($("#compare-revisions")) $("#compare-revisions").disabled = busy;
   document
     .querySelectorAll(
       "#dossier-id,#doi,#title,#notice-doi,#claims input,#claims textarea",

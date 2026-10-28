@@ -1,0 +1,132 @@
+{
+  "schema": "erratascope-revision-comparison-1",
+  "provenance": "CHAIN_READBACK",
+  "exported_at": "2026-10-28T18:02:59.655Z",
+  "network": {
+    "chain_id": 61999,
+    "contract": "0x718f4Bf7De087e83a728276B33308A4683261ef7"
+  },
+  "from": 0,
+  "to": 1,
+  "dossier": {
+    "id": "citation-notebook",
+    "input": {
+      "claims": [
+        {
+          "id": "C1",
+          "locator": "Title and study scope",
+          "text": "I cite this paper as a computational reproducibility study of longitudinal data analyses."
+        },
+        {
+          "id": "C2",
+          "locator": "Author affiliation 5",
+          "text": "I will reproduce Verena Loidl\u2019s affiliation from the original publication."
+        }
+      ],
+      "doi": "10.1371/journal.pone.0251194",
+      "title": "A computational reproducibility study of PLOS ONE articles featuring longitudinal data analyses"
+    },
+    "input_sha256": "088f00c37d524f77c16248d6e0c6a6141766c13426c52e50a532631446b206a4",
+    "owner": "0x7a9a693b03ce2fcd6c7b2f9c69158aafefeed2c3",
+    "protocol": "erratascope-1"
+  },
+  "before": null,
+  "after": {
+    "actions": [
+      {
+        "action": "NO_CHANGE_FROM_NOTICE",
+        "id": "C1"
+      },
+      {
+        "action": "REWRITE",
+        "id": "C2"
+      }
+    ],
+    "assessment": {
+      "findings": [
+        {
+          "effect": "UNCHANGED_SCOPE",
+          "id": "C1",
+          "quote": "There is an error in affiliation 5 for author Verena Loidl.",
+          "reason": "The correction addresses only a specific author affiliation and does not alter the study's title or overall scope as cited in the claim."
+        },
+        {
+          "effect": "CHANGED",
+          "id": "C2",
+          "quote": "There is an error in affiliation 5 for author Verena Loidl. The correct affiliation is: Institute for Medical Information Processing, Biometry, and Epidemiology\u2014IBE, LMU Munich, Munich, Germany.",
+          "reason": "The notice explicitly corrects the affiliation details for Verena Loidl, directly changing the information claimed to be reproduced from the original publication."
+        }
+      ],
+      "kind": "CORRECTION",
+      "linked": true
+    },
+    "cumulative_actions": [
+      {
+        "action": "NO_CHANGE_FROM_NOTICE",
+        "id": "C1"
+      },
+      {
+        "action": "REWRITE",
+        "id": "C2"
+      }
+    ],
+    "id": "citation-notebook",
+    "input_sha256": "088f00c37d524f77c16248d6e0c6a6141766c13426c52e50a532631446b206a4",
+    "notice_doi": "10.1371/journal.pone.0269047",
+    "notice_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0269047",
+    "owner": "0x7a9a693b03ce2fcd6c7b2f9c69158aafefeed2c3",
+    "protocol": "erratascope-1",
+    "revision": 1,
+    "source": "SKIP TO MAIN CONTENT Advertisement plos.org Create account Sign in Browse Topics Loading metrics OPEN ACCESS CORRECTION Correction: A computational reproducibility study of PLOS ONE articles featuring longitudinal data analyses Heidi Seibold, Severin Czerny, Siona Decke, Roman Dieterle, Thomas Eder, Steffen Fohr, Nico Hahn, Rabea Hartmann, Christoph Heindl, Philipp Kopper, Dario Lepke, Verena Loidl, Maximilian Mandl, [ ... ], Malte Nalenz [ view all ] Published: May 23, 2022 https://doi.org/10.1371/journal.pone.0269047 Article Metrics Comments Media Coverage Reference Reader Comments There is an error in affiliation 5 for author Verena Loidl. The correct affiliation is: Institute for Medical Information Processing, Biometry, and Epidemiology\u2014IBE, LMU Munich, Munich, Germany. Reference 1. Seibold H, Czerny S, Decke S, Dieterle R, Eder T, Fohr S, et al. (2021) A computational reproducibility study of PLOS ONE articles featuring longitudinal data analyses. PLoS ONE 16(6): e0251194. https://doi.org/10.1371/journal.pone.0251194 pmid:34153038 View Article PubMed/NCBI Google Scholar Citation: Seibold H, Czerny S, Decke S, Dieterle R, Eder T, Fohr S, et al. (2022) Correction: A computational reproducibility study of PLOS ONE articles featuring longitudinal data analyses. PLoS ONE 17(5): e0269047. https://doi.org/10.1371/journal.pone.0269047 Published: May 23, 2022 Copyright: \u00a9 2022 Seibold et al. This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. Download PDF Print Share Related PLOS Articles CORRECTION pertains to A computational reproducibility study of PLOS ONE articles featuring longitudinal data analyses View Page PDF ADVERTISEMENT Publications PLOS Aging and Health PLOS Biology PLOS Climate PLOS Complex Systems PLOS Computational Biology PLOS Digital Health PLOS Ecosystems PLOS Genetics PLOS Global Public Health PLOS Medicine PLOS Mental Health PLOS Neglected Tropical Diseases PLOS One PLOS Pathogens PLOS Sustainability and Transformation PLOS Water Home Blogs Collections Give feedback LOCKSS Privacy Policy Terms of Use Advertise Media Inquiries Contact PLOS is a nonprofit 501(c)(3) corporation, #C2354500, based in California, US Cookie Preference Center Our website uses different types of cookies. Optional cookies will only be set with your consent and you may withdraw this consent at any time. Below you can learn more about the types of cookies PLOS uses and register your cookie preferences. Accept All Cookies Customize Your Cookie Preference + Strictly Necessary Always On + Functional Off + Performance and Analytics Off + Marketing Off Save Selected Preferences and Close For more information about the cookies and other technologies used by us, please read our Cookie Policy.",
+    "source_sha256": "b4e273c88eb9235f2924f53f48a9ec41068fdbda771343caa3c7ab30b7976594"
+  },
+  "rows": [
+    {
+      "id": "C1",
+      "text": "I cite this paper as a computational reproducibility study of longitudinal data analyses.",
+      "locator": "Title and study scope",
+      "before_action": "NOT_ASSESSED",
+      "after_action": "NO_CHANGE_FROM_NOTICE",
+      "before_cumulative": "NOT_ASSESSED",
+      "after_cumulative": "NO_CHANGE_FROM_NOTICE",
+      "action_changed": true,
+      "cumulative_changed": true,
+      "evidence_changed": true,
+      "before_finding": null,
+      "after_finding": {
+        "effect": "UNCHANGED_SCOPE",
+        "id": "C1",
+        "quote": "There is an error in affiliation 5 for author Verena Loidl.",
+        "reason": "The correction addresses only a specific author affiliation and does not alter the study's title or overall scope as cited in the claim."
+      },
+      "retained_warning": false
+    },
+    {
+      "id": "C2",
+      "text": "I will reproduce Verena Loidl\u2019s affiliation from the original publication.",
+      "locator": "Author affiliation 5",
+      "before_action": "NOT_ASSESSED",
+      "after_action": "REWRITE",
+      "before_cumulative": "NOT_ASSESSED",
+      "after_cumulative": "REWRITE",
+      "action_changed": true,
+      "cumulative_changed": true,
+      "evidence_changed": true,
+      "before_finding": null,
+      "after_finding": {
+        "effect": "CHANGED",
+        "id": "C2",
+        "quote": "There is an error in affiliation 5 for author Verena Loidl. The correct affiliation is: Institute for Medical Information Processing, Biometry, and Epidemiology\u2014IBE, LMU Munich, Munich, Germany.",
+        "reason": "The notice explicitly corrects the affiliation details for Verena Loidl, directly changing the information claimed to be reproduced from the original publication."
+      },
+      "retained_warning": false
+    }
+  ],
+  "summary": {
+    "action_changes": 2,
+    "cumulative_changes": 2,
+    "evidence_changes": 2,
+    "retained_warnings": 0
+  },
+  "limits": "Comparison of two finalized state snapshots, not a new validator assessment or transaction receipt. Baseline 0 is sealed input with no assessment. No change from a notice does not clear earlier warnings or certify the paper. Non-adjacent revisions show endpoint differences only."
+}
